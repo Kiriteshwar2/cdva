@@ -1,0 +1,19 @@
+# Target runtime: Python 3.11 or 3.12
+# For GPU builds of PyTorch, install the matching torch wheel from the official
+# PyTorch index before running `pip install -r requirements.txt`.
+
+torch>=2.6,<2.12
+torch-geometric>=2.6,<3.0
+numpy>=2.2,<3.0
+scipy>=1.15,<2.0
+matplotlib>=3.10,<4.0
+PyYAML>=6.0,<7.0
+tqdm>=4.67,<5.0
+
+pymatgen>=2026.3.23,<2027.0
+mp-api>=0.46.0,<0.47.0
+e3nn>=0.5.7,<0.6.0
+
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.34,<1.0
+requests>=2.32,<3.0

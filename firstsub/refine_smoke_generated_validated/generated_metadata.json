@@ -1,0 +1,78 @@
+[
+  {
+    "sample_index": 0,
+    "num_atoms": 3,
+    "species": [
+      "O",
+      "O",
+      "O"
+    ],
+    "lattice": {
+      "a": 0.7717176079750061,
+      "b": 0.8370448118157799,
+      "c": 0.7764469500569101,
+      "alpha": 77.0709248136462,
+      "beta": 85.95953148636433,
+      "gamma": 83.35896835614197
+    },
+    "cif_path": "refine_smoke_generated_validated\\generated_000.cif",
+    "refinement_steps": 2,
+    "refinement_noise_std": 0.02,
+    "validation": {
+      "valid": false,
+      "fractional_coordinates": {
+        "valid": true,
+        "min_value": 0.24093514680862427,
+        "max_value": 0.8754065632820129
+      },
+      "lattice": {
+        "valid": false,
+        "determinant": 0.4850446581840515,
+        "volume": 0.4850446581840515,
+        "finite": true
+      },
+      "minimum_pair_distance": 0.35310887865806667,
+      "overlap_ok": false,
+      "roundtrip_ok": true,
+      "roundtrip_error": ""
+    }
+  },
+  {
+    "sample_index": 1,
+    "num_atoms": 3,
+    "species": [
+      "O",
+      "O",
+      "O"
+    ],
+    "lattice": {
+      "a": 0.7769315242767334,
+      "b": 0.8298068033151891,
+      "c": 0.7953835519657397,
+      "alpha": 77.65769055170517,
+      "beta": 83.56286241320034,
+      "gamma": 78.8847410349608
+    },
+    "cif_path": "refine_smoke_generated_validated\\generated_001.cif",
+    "refinement_steps": 2,
+    "refinement_noise_std": 0.02,
+    "validation": {
+      "valid": false,
+      "fractional_coordinates": {
+        "valid": true,
+        "min_value": 0.21079815924167633,
+        "max_value": 0.8434720039367676
+      },
+      "lattice": {
+        "valid": false,
+        "determinant": 0.490191251039505,
+        "volume": 0.490191251039505,
+        "finite": true
+      },
+      "minimum_pair_distance": 0.3489883072250662,
+      "overlap_ok": false,
+      "roundtrip_ok": true,
+      "roundtrip_error": ""
+    }
+  }
+]

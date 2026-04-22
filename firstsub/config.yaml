@@ -1,0 +1,70 @@
+seed: 42
+
+paths:
+  run_dir: runs/cdvae
+
+dataset:
+  processed_jsonl: cache/mp/mp_structures/processed_structures.jsonl
+  species_vocab: cache/mp/mp_structures/species_vocab.json
+  cache_root: cache/mp
+  dataset_name: mp_structures
+  max_materials: 10000
+  max_elements: 3
+  max_atoms: 50
+  chunk_size: 500
+  include_gnome: false
+  include_deprecated: false
+  allow_disordered: false
+  timeout_seconds: 60
+  cutoff_angstrom: 5.0
+  max_neighbors: 32
+  val_ratio: 0.1
+  graph_cache_dir: cache/mp/mp_structures/graphs
+  force_rebuild_graphs: false
+  precompute_graphs: true
+
+model:
+  hidden_dim: 192
+  latent_dim: 128
+  num_encoder_layers: 4
+  num_rbf: 32
+  dropout: 0.1
+
+training:
+  batch_size: 32
+  num_workers: 0
+  epochs: 50
+  learning_rate: 0.005
+  weight_decay: 0.00001
+  grad_clip_norm: 5.0
+  kl_beta: 0.0001
+  min_distance_angstrom: 1.2
+  lr_decay_factor: 0.5
+  lr_patience: 5
+  kl_annealing:
+    start_beta: 0.0
+    end_beta: 0.0001
+    warmup_epochs: 10
+  curriculum_stages:
+    - name: bootstrap
+      max_samples: 5000
+      epochs: 10
+    - name: scaleup
+      max_samples: 20000
+      epochs: 20
+    - name: full
+      max_samples: 50000
+      epochs: 20
+  loss_weights:
+    count: 1.0
+    atom_type: 1.0
+    coord: 0.5
+    lattice: 1.0
+    kl: 0.05
+    distance_consistency: 0.2
+    symmetry_consistency: 0.1
+    refinement: 0.25
+    energy_proxy: 0.05
+    volume: 0.05
+    matching_unmatched: 1.0
+    min_separation: 0.1

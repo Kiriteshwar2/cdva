@@ -1,0 +1,38 @@
+[
+  {
+    "sample_index": 0,
+    "num_atoms": 3,
+    "species": [
+      "Na",
+      "Na",
+      "Na"
+    ],
+    "lattice": {
+      "a": 11.317331314086914,
+      "b": 11.421314239501951,
+      "c": 9.922042846679688,
+      "alpha": 99.13976287841798,
+      "beta": 86.29219818115234,
+      "gamma": 95.75849151611328
+    },
+    "cif_path": "smoke_generated\\generated_000.cif"
+  },
+  {
+    "sample_index": 1,
+    "num_atoms": 3,
+    "species": [
+      "Na",
+      "Na",
+      "Na"
+    ],
+    "lattice": {
+      "a": 11.764953613281248,
+      "b": 12.002747535705566,
+      "c": 9.985919952392578,
+      "alpha": 97.2005615234375,
+      "beta": 85.50619506835938,
+      "gamma": 91.80033874511719
+    },
+    "cif_path": "smoke_generated\\generated_001.cif"
+  }
+]

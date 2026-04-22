@@ -1,0 +1,42 @@
+[
+  {
+    "sample_index": 0,
+    "num_atoms": 3,
+    "species": [
+      "O",
+      "O",
+      "O"
+    ],
+    "lattice": {
+      "a": 0.7909571528434753,
+      "b": 0.8284827815912155,
+      "c": 0.8016151058211471,
+      "alpha": 76.8656195511846,
+      "beta": 84.90947210130813,
+      "gamma": 80.7208157643718
+    },
+    "cif_path": "refine_smoke_generated\\generated_000.cif",
+    "refinement_steps": 3,
+    "refinement_noise_std": 0.03
+  },
+  {
+    "sample_index": 1,
+    "num_atoms": 3,
+    "species": [
+      "O",
+      "O",
+      "O"
+    ],
+    "lattice": {
+      "a": 0.7855280637741089,
+      "b": 0.8166261802378322,
+      "c": 0.8012735456001737,
+      "alpha": 77.8021578637578,
+      "beta": 82.78451065349402,
+      "gamma": 79.63914881214679
+    },
+    "cif_path": "refine_smoke_generated\\generated_001.cif",
+    "refinement_steps": 3,
+    "refinement_noise_std": 0.03
+  }
+]

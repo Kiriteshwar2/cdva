@@ -1,0 +1,38 @@
+[
+  {
+    "sample_index": 0,
+    "num_atoms": 1,
+    "species": [
+      "O"
+    ],
+    "lattice": {
+      "a": 0.6532064080238342,
+      "b": 0.7090112756008877,
+      "c": 0.7002295777540123,
+      "alpha": 82.41751408571336,
+      "beta": 73.22838202505555,
+      "gamma": 97.92767739222036
+    },
+    "cif_path": "runs\\validation_smoke\\generated\\generated_000.cif",
+    "refinement_steps": 5,
+    "refinement_noise_std": 0.05,
+    "validation": {
+      "valid": false,
+      "fractional_coordinates": {
+        "valid": true,
+        "min_value": 0.331343412399292,
+        "max_value": 0.626360297203064
+      },
+      "lattice": {
+        "valid": false,
+        "determinant": 0.3024495840072632,
+        "volume": 0.3024495840072632,
+        "finite": true
+      },
+      "minimum_pair_distance": Infinity,
+      "overlap_ok": true,
+      "roundtrip_ok": true,
+      "roundtrip_error": ""
+    }
+  }
+]
