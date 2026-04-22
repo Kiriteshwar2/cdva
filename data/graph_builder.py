@@ -143,7 +143,7 @@ class CrystalGraphDataset(Dataset):
         entry = self._index[index]
         graph_path = self.graph_cache_dir / f"{entry['material_id']}.pt"
         if graph_path.exists() and not self.graph_config.force_rebuild:
-            graph = torch.load(graph_path, map_location="cpu")
+            graph = torch.load(graph_path, map_location="cpu", weights_only=False)
             if hasattr(graph, "edge_vec") and hasattr(graph, "cart_coords"):
                 return graph
 
