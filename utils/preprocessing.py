@@ -47,25 +47,47 @@ def read_jsonl_record_at_offset(path: str | Path, offset: int) -> dict[str, Any]
     return json.loads(line)
 
 
-def record_to_structure(record: dict[str, Any]) -> Structure:
-    if "structure" in record:
-        return Structure.from_dict(record["structure"])
+def is_valid_lattice(structure):
+    lattice = structure.lattice
 
-    lattice = record["lattice"]
-    return Structure(
-        lattice=Lattice.from_parameters(
-            a=float(lattice["a"]),
-            b=float(lattice["b"]),
-            c=float(lattice["c"]),
-            alpha=float(lattice["alpha"]),
-            beta=float(lattice["beta"]),
-            gamma=float(lattice["gamma"]),
-        ),
-        species=record["species"],
-        coords=record["frac_coords"],
-        coords_are_cartesian=False,
+    a, b, c = lattice.a, lattice.b, lattice.c
+    alpha, beta, gamma = lattice.alpha, lattice.beta, lattice.gamma
+
+    return (
+        2 <= a <= 20 and
+        2 <= b <= 20 and
+        2 <= c <= 20 and
+        60 <= alpha <= 120 and
+        60 <= beta <= 120 and
+        60 <= gamma <= 120
     )
 
+def record_to_structure(record: dict[str, Any]) -> Structure | None:
+    if "structure" in record:
+        structure = Structure.from_dict(record["structure"])
+        if structure is None:
+            continue
+    else:
+        lattice = record["lattice"]
+        structure = Structure(
+            lattice=Lattice.from_parameters(
+                a=float(lattice["a"]),
+                b=float(lattice["b"]),
+                c=float(lattice["c"]),
+                alpha=float(lattice["alpha"]),
+                beta=float(lattice["beta"]),
+                gamma=float(lattice["gamma"]),
+            ),
+            species=record["species"],
+            coords=record["frac_coords"],
+            coords_are_cartesian=False,
+        )
+
+    # 🚨 ADD THIS FILTER
+    if not is_valid_lattice(structure):
+        return None
+
+    return structure
 
 def canonicalize_structure(structure: Structure) -> Structure:
     ordered_sites = sorted(
@@ -154,12 +176,12 @@ def structure_from_prediction(
         lattice_obj = Lattice(lattice.numpy())
     else:
         lattice_obj = Lattice.from_parameters(
-            a=float(max(lattice[0].item(), 0.1)),
-            b=float(max(lattice[1].item(), 0.1)),
-            c=float(max(lattice[2].item(), 0.1)),
-            alpha=float(np.clip(lattice[3].item(), 10.0, 179.0)),
-            beta=float(np.clip(lattice[4].item(), 10.0, 179.0)),
-            gamma=float(np.clip(lattice[5].item(), 10.0, 179.0)),
+            a=float(np.clip(lattice[0].item(), 2.0, 20.0)),
+            b=float(np.clip(lattice[1].item(), 2.0, 20.0)),
+            c=float(np.clip(lattice[2].item(), 2.0, 20.0)),
+            alpha=float(np.clip(lattice[3].item(), 60.0, 120.0)),
+            beta=float(np.clip(lattice[4].item(), 60.0, 120.0)),
+            gamma=float(np.clip(lattice[5].item(), 60.0, 120.0)),
         )
 
     return Structure(lattice=lattice_obj, species=species, coords=frac_coords.numpy(), coords_are_cartesian=False)
