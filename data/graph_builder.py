@@ -39,7 +39,10 @@ class CrystalGraphBuilder:
         self.max_neighbors = max_neighbors
 
     def build_graph(self, record: dict[str, Any], species_vocab: dict[str, int]) -> Data:
-        structure = canonicalize_structure(record_to_structure(record))
+        structure = record_to_structure(record)
+        if structure is None:
+            return None  # skip invalid structure
+        structure = canonicalize_structure(structure)
         atom_symbols = [site.specie.symbol for site in structure.sites]
         atom_types = torch.tensor([species_vocab[symbol] for symbol in atom_symbols], dtype=torch.long)
         atomic_numbers = torch.tensor([site.specie.Z for site in structure.sites], dtype=torch.long)
@@ -139,18 +142,30 @@ class CrystalGraphDataset(Dataset):
     def __len__(self) -> int:
         return len(self._index)
 
-    def __getitem__(self, index: int) -> Data:
-        entry = self._index[index]
-        graph_path = self.graph_cache_dir / f"{entry['material_id']}.pt"
-        if graph_path.exists() and not self.graph_config.force_rebuild:
-            graph = torch.load(graph_path, map_location="cpu", weights_only=False)
-            if hasattr(graph, "edge_vec") and hasattr(graph, "cart_coords"):
-                return graph
+def __getitem__(self, index: int) -> Data:
+    entry = self._index[index]
+    graph_path = self.graph_cache_dir / f"{entry['material_id']}.pt"
 
-        record = read_jsonl_record_at_offset(self.processed_jsonl_path, entry["offset"])
-        graph = self.builder.build_graph(record, self.species_vocab)
-        torch.save(graph, graph_path)
-        return graph
+    # ✅ Load cached graph if exists
+    if graph_path.exists() and not self.graph_config.force_rebuild:
+        graph = torch.load(graph_path, map_location="cpu", weights_only=False)
+        if hasattr(graph, "edge_vec") and hasattr(graph, "cart_coords"):
+            return graph
+
+    # ✅ Load raw record
+    record = read_jsonl_record_at_offset(self.processed_jsonl_path, entry["offset"])
+
+    # ✅ Build graph safely
+    graph = self.builder.build_graph(record, self.species_vocab)
+
+    # 🚨 KEY FIX: skip invalid graphs
+    if graph is None:
+        # Option 1 (safe fallback): try next sample
+        return self.__getitem__((index + 1) % len(self))
+
+    # ✅ Save + return
+    torch.save(graph, graph_path)
+    return graph
 
     @property
     def num_species(self) -> int:
