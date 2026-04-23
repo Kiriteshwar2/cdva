@@ -25,7 +25,7 @@ dataset:
 
 model:
   hidden_dim: 192
-  latent_dim: 128
+  llatent_dim: 256
   num_encoder_layers: 4
   num_rbf: 32
   dropout: 0.1
@@ -33,11 +33,11 @@ model:
 training:
   batch_size: 16              # ↓ critical (memory + stability)
   num_workers: 0
-  epochs: 50
+  epochs: 200
   learning_rate: 0.0002       # ↓ MASSIVE fix
   weight_decay: 0.00001
   grad_clip_norm: 1.0         # ↓ prevents explosion
-  kl_beta: 0.0001
+  kl_beta: 0.001
   min_distance_angstrom: 1.2
 
   lr_decay_factor: 0.5
@@ -45,8 +45,8 @@ training:
 
   kl_annealing:
     start_beta: 0.0
-    end_beta: 0.0001
-    warmup_epochs: 10
+    end_beta: 0.001
+    warmup_epochs: 30
 
   curriculum_stages:
     - name: bootstrap
@@ -62,8 +62,8 @@ training:
   loss_weights:
     count: 1.0
     atom_type: 1.0
-    coord: 3.0                # ↓ big stabilization
-    lattice: 1.0
+    coord: 5.0                # ↓ big stabilization
+    lattice: 2.0
     kl: 0.01                  # ↓ prevents KL explosion
     distance_consistency: 0.1
     symmetry_consistency: 0.05
@@ -71,4 +71,4 @@ training:
     energy_proxy: 0.005       # ↓ very important
     volume: 0.005
     matching_unmatched: 1.0
-    min_separation: 0.05
+    min_separation: 0.2
