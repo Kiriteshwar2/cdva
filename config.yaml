@@ -8,7 +8,7 @@ dataset:
   species_vocab: cache/mp/mp_structures/species_vocab.json
   cache_root: cache/mp
   dataset_name: mp_structures
-  max_materials: 50000
+  max_materials: 120000
   max_elements: 3
   max_atoms: 50
   chunk_size: 500
@@ -50,14 +50,14 @@ training:
 
   curriculum_stages:
     - name: bootstrap
-      max_samples: 3000       # ↓ smoother start
-      epochs: 10
+      max_samples: 5000       # ↓ smoother start
+      epochs: 20
     - name: scaleup
-      max_samples: 15000
-      epochs: 20
+      max_samples: 30000
+      epochs: 80
     - name: full
-      max_samples: 50000
-      epochs: 20
+      max_samples: 80000
+      epochs: 100
 
   loss_weights:
     count: 1.0

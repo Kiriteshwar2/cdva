@@ -47,20 +47,36 @@ def read_jsonl_record_at_offset(path: str | Path, offset: int) -> dict[str, Any]
     return json.loads(line)
 
 
-def is_valid_lattice(structure):
+ddef is_valid_structure(structure):
     lattice = structure.lattice
 
     a, b, c = lattice.a, lattice.b, lattice.c
     alpha, beta, gamma = lattice.alpha, lattice.beta, lattice.gamma
+    volume = structure.volume
+    num_atoms = len(structure)
 
-    return (
-        2 <= a <= 20 and
-        2 <= b <= 20 and
-        2 <= c <= 20 and
-        60 <= alpha <= 120 and
-        60 <= beta <= 120 and
-        60 <= gamma <= 120
-    )
+    # 1. Lattice sanity
+    if not (2.0 <= a <= 20.0 and 2.0 <= b <= 20.0 and 2.0 <= c <= 20.0):
+        return False
+
+    if not (60 <= alpha <= 120 and 60 <= beta <= 120 and 60 <= gamma <= 120):
+        return False
+
+    # 2. Volume check
+    if not (10 <= volume <= 1000):
+        return False
+
+    # 3. Atom count
+    if not (1 <= num_atoms <= 50):
+        return False
+
+    # 4. Minimum interatomic distance
+    dist_matrix = structure.distance_matrix
+    np.fill_diagonal(dist_matrix, np.inf)
+    if dist_matrix.min() < 1.2:
+        return False
+
+    return True
 
 def record_to_structure(record: dict[str, Any]) -> Structure | None:
     if "structure" in record:
@@ -84,7 +100,7 @@ def record_to_structure(record: dict[str, Any]) -> Structure | None:
         )
 
     # 🚨 ADD THIS FILTER
-    if not is_valid_lattice(structure):
+    if not is_valid_structure(structure):
         return None
 
     return structure
