@@ -47,7 +47,7 @@ def read_jsonl_record_at_offset(path: str | Path, offset: int) -> dict[str, Any]
     return json.loads(line)
 
 
-ddef is_valid_structure(structure):
+def is_valid_structure(structure):
     lattice = structure.lattice
 
     a, b, c = lattice.a, lattice.b, lattice.c
@@ -78,32 +78,37 @@ ddef is_valid_structure(structure):
 
     return True
 
-def record_to_structure(record: dict[str, Any]) -> Structure | None:
-    if "structure" in record:
-        structure = Structure.from_dict(record["structure"])
-        if structure is None:
-            continue
-    else:
-        lattice = record["lattice"]
-        structure = Structure(
-            lattice=Lattice.from_parameters(
-                a=float(lattice["a"]),
-                b=float(lattice["b"]),
-                c=float(lattice["c"]),
-                alpha=float(lattice["alpha"]),
-                beta=float(lattice["beta"]),
-                gamma=float(lattice["gamma"]),
-            ),
-            species=record["species"],
-            coords=record["frac_coords"],
-            coords_are_cartesian=False,
-        )
+def record_to_structure(record):
+    try:
+        # Case 1: structure already present
+        if "structure" in record:
+            structure = Structure.from_dict(record["structure"])
 
-    # 🚨 ADD THIS FILTER
-    if not is_valid_structure(structure):
+        # Case 2: build manually
+        else:
+            lattice = record["lattice"]
+            structure = Structure(
+                lattice=Lattice.from_parameters(
+                    a=float(lattice["a"]),
+                    b=float(lattice["b"]),
+                    c=float(lattice["c"]),
+                    alpha=float(lattice["alpha"]),
+                    beta=float(lattice["beta"]),
+                    gamma=float(lattice["gamma"]),
+                ),
+                species=record["species"],
+                coords=record["frac_coords"],
+                coords_are_cartesian=False,
+            )
+
+        # ✅ SINGLE CLEAN FILTER
+        if not is_valid_structure(structure):
+            return None
+
+        return structure
+
+    except Exception:
         return None
-
-    return structure
 
 def canonicalize_structure(structure: Structure) -> Structure:
     ordered_sites = sorted(
