@@ -4,8 +4,8 @@ paths:
   run_dir: runs/cdvae
 
 dataset:
-  processed_jsonl: cache/mp/mp_structures/processed_structures.jsonl
-  species_vocab: cache/mp/mp_structures/species_vocab.json
+  processed_jsonl: cache/mp/mp_structures_79bd093e52ec/processed_structures.jsonl
+  species_vocab: cache/mp/mp_structures_79bd093e52ec/species_vocab.json
   cache_root: cache/mp
   dataset_name: mp_structures
   max_materials: 120000
@@ -19,13 +19,13 @@ dataset:
   cutoff_angstrom: 5.0
   max_neighbors: 32
   val_ratio: 0.1
-  graph_cache_dir: cache/mp/mp_structures/graphs
+  graph_cache_dir: cache/mp/mp_structures_79bd093e52ec/graphs
   force_rebuild_graphs: false
   precompute_graphs: true
 
 model:
   hidden_dim: 192
-  llatent_dim: 256
+  latent_dim: 256
   num_encoder_layers: 4
   num_rbf: 32
   dropout: 0.1

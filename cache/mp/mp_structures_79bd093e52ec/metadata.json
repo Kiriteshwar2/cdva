@@ -1,0 +1,32 @@
+{
+  "created_at_utc": "2026-04-24T04:54:33.828517+00:00",
+  "query_signature": {
+    "dataset_name": "mp_structures",
+    "max_materials": 1000,
+    "max_elements": 3,
+    "max_atoms": 50,
+    "chunk_size": 500,
+    "include_gnome": false,
+    "include_deprecated": false,
+    "allow_disordered": false,
+    "request_retries": 3,
+    "retry_backoff_seconds": 2.0,
+    "fields": [
+      "material_id",
+      "structure"
+    ]
+  },
+  "download_stats": {
+    "downloaded": 945,
+    "duplicates_skipped": 0,
+    "disordered_skipped": 0,
+    "filtered_skipped": 55
+  },
+  "processed_count": 945,
+  "num_species": 89,
+  "paths": {
+    "raw_jsonl": "cache\\mp\\mp_structures_79bd093e52ec\\raw_structures.jsonl",
+    "processed_jsonl": "cache\\mp\\mp_structures_79bd093e52ec\\processed_structures.jsonl",
+    "species_vocab": "cache\\mp\\mp_structures_79bd093e52ec\\species_vocab.json"
+  }
+}

@@ -17,3 +17,54 @@ e3nn>=0.5.7,<0.6.0
 fastapi>=0.115,<1.0
 uvicorn[standard]>=0.34,<1.0
 requests>=2.32,<3.0
+
+
+# ================================
+# Core ML (GPU - MUST MATCH)
+# ================================
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+torchaudio==2.6.0+cu124
+
+# PyTorch Geometric (from wheel index)
+torch-geometric==2.7.0
+torch-scatter==2.1.2+pt26cu124
+torch-sparse==0.6.18+pt26cu124
+torch-cluster==1.6.3+pt26cu124
+torch-spline-conv==1.2.2+pt26cu124
+pyg-lib==0.5.0+pt26cu124
+
+# ================================
+# CDVAE / Core libs
+# ================================
+e3nn==0.6.0
+
+# ================================
+# Scientific
+# ================================
+numpy==2.2.6
+scipy==1.15.3
+pandas==3.0.2
+matplotlib==3.10.9
+scikit-learn==1.8.0
+
+# ================================
+# Materials
+# ================================
+pymatgen==2026.3.23
+mp-api==0.46.0
+
+# ================================
+# Utilities
+# ================================
+PyYAML==6.0.3
+tqdm==4.67.3
+requests==2.33.1
+tabulate==0.10.0
+plotly==6.7.0
+
+# ================================
+# Backend (optional)
+# ================================
+fastapi==0.136.1
+uvicorn==0.46.0
