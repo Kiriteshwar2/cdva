@@ -1,0 +1,142 @@
+# =========================================================
+# OS / Editor
+# =========================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+.idea/
+
+# =========================================================
+# Python
+# =========================================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# =========================================================
+# Virtual Environments
+# =========================================================
+.venv/
+.venv_gpu/
+venv/
+env/
+ENV/
+
+# =========================================================
+# Environment Files
+# =========================================================
+.env
+.env.*
+!.env.example
+
+firstsub/backend/.env
+firstsub/frontend/.env
+
+# =========================================================
+# Frontend
+# =========================================================
+firstsub/frontend/node_modules/
+firstsub/frontend/dist/
+firstsub/frontend/.vite/
+
+# =========================================================
+# Logs
+# =========================================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================================================
+# Python Build / Cache
+# =========================================================
+*.egg-info/
+build/
+dist/
+
+# =========================================================
+# Uploads / Runtime Files
+# =========================================================
+firstsub/backend/uploads/*
+!firstsub/backend/uploads/.gitkeep
+
+# =========================================================
+# Generated Crystal Files
+# =========================================================
+*.cif
+*.xyz
+*.vasp
+
+firstsub/generated_*.cif
+firstsub/generated_*.png
+firstsub/generated_metadata.json
+
+# =========================================================
+# Training / Inference Outputs
+# =========================================================
+firstsub/cache/
+firstsub/runs/
+firstsub/reports/
+
+firstsub/smoke_generated/
+firstsub/refine_smoke_generated/
+firstsub/refine_smoke_generated_validated/
+
+# =========================================================
+# Model Checkpoints / Backups
+# =========================================================
+*.ckpt
+*.pt
+*.pth
+
+models_backup.zip
+reports.zip
+
+# =========================================================
+# Large Data / Dataset Artifacts
+# =========================================================
+*.csv
+*.h5
+*.npz
+*.npy
+*.parquet
+
+# Uncomment if datasets are too large:
+# firstsub/data/
+
+# =========================================================
+# Docker
+# =========================================================
+docker-data/
+*.pid
+
+# =========================================================
+# Temporary Files
+# =========================================================
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# =========================================================
+# Ignore Generated Reports
+# =========================================================
+reports/
+*.pdf
+
+# =========================================================
+# Keep Important Project Files
+# =========================================================
+!README.md
+!requirements.txt
+!docker-compose.yml
+!config.yaml
