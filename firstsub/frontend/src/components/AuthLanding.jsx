@@ -47,29 +47,6 @@ export default function AuthLanding({ onLogin, onSignup, busy, error }) {
         <h1>{title}</h1>
         <p>AI-powered crystal generation with controllable physics</p>
 
-        <div className="hero-actions">
-          <button type="button" className="primary-button" onClick={() => setMode("signup")}>
-            Get Started
-          </button>
-          <button type="button" className="secondary-button" onClick={() => setMode("login")}>
-            View Demo
-          </button>
-        </div>
-
-        <div className="hero-grid">
-          <article className="hero-stat">
-            <span>Controlled generation</span>
-            <strong>Constraint-aware sampling</strong>
-          </article>
-          <article className="hero-stat">
-            <span>Persistent experiments</span>
-            <strong>Mongo-backed history</strong>
-          </article>
-          <article className="hero-stat">
-            <span>Research-grade outputs</span>
-            <strong>CIF-ready structures</strong>
-          </article>
-        </div>
       </section>
 
       <section className="auth-card">
@@ -133,9 +110,9 @@ export default function AuthLanding({ onLogin, onSignup, busy, error }) {
           </button>
         </form>
 
-        <p className="auth-note">
-          Your workspace history, generated CIFs, checkpoints, and metadata are stored server-side in MongoDB.
-        </p>
+          <p className="auth-terms">
+            By signing up, you agree to our <a href="/terms" target="_blank">Terms of Service</a> and acknowledge our <a href="/privacy" target="_blank">Privacy Policy</a>.
+          </p>
       </section>
     </div>
   );
